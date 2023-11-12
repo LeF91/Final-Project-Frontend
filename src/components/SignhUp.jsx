@@ -7,7 +7,7 @@ function SignupPage() {
   const passwordInput = useRef();
   const emailInput = useRef();
   //   const userRoleInput = useRef();
-  const adressInput = useRef();
+  const departementInput = useRef();
 
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ function SignupPage() {
     const password = passwordInput.current.value;
     const email = emailInput.current.value;
     // const userRole = userRoleInput.current.value; to add also to the async function in the req body!!!!
-    const adress = adressInput.current.value;
+    const departement = departementInput.current.value;
 
     try {
       const response = await myApi.signup({
@@ -26,7 +26,7 @@ function SignupPage() {
         password,
         email,
 
-        adress,
+        departement,
       });
       console.log("success", response);
       //   change for a toggle!!! singUp - logIn//
@@ -55,13 +55,25 @@ function SignupPage() {
         />
       </div>
       <div>
-        <label htmlFor="adress">adress: </label>
-        <input type="number" ref={adressInput} id="adress" autoComplete="off" />
+        <label htmlFor="departement">departement: </label>
+        <input
+          type="number"
+          ref={departementInput}
+          id="departement"
+          autoComplete="off"
+        />
       </div>
 
       <div>
         <label htmlFor="password">Password: </label>
-        <input type="password" ref={passwordInput} id="password" />
+        <input
+          type="password"
+          required
+          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+          title="Password must have at least 6 characters and contain at least one number, one lowercase and one uppercase letter."
+          ref={passwordInput}
+          id="password"
+        />
       </div>
 
       <button>Signup</button>
