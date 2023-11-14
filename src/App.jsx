@@ -2,8 +2,8 @@ import "./App.css";
 import { Routes, Route, Link, NavLink } from "react-router-dom";
 import Navbar from "./components/Navbar";
 // import { CarsFilters } from "./components/CarsFilters";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
 import CarsPage from "./pages/CarsPage";
 import OneCarPage from "./pages/OneCarPage";
 import HomePage from "./pages/HomePage";
@@ -21,8 +21,8 @@ function App() {
               All Cars
             </Route>
             <Route path="/car/:carId" element={<OneCarPage />}></Route>
-            <Route path="/signup" element={<Signup />}></Route>
-            <Route path="/login" element={<Login />}></Route>
+            <Route path="/signup" element={<SignupPage />}></Route>
+            <Route path="/login" element={<LoginPage />}></Route>
           </Route>
         </Routes>
       </div>

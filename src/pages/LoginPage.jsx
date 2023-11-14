@@ -1,9 +1,9 @@
 import { useRef, useState, useContext } from "react";
-import myApi from "./../service/service";
+import myApi from "../service/service";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "./../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
-function Login() {
+function LoginPage() {
   const emailInput = useRef();
   const passwordInput = useRef();
   const [error, setError] = useState("");
@@ -30,7 +30,7 @@ function Login() {
     }
   }
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="form" onSubmit={handleSubmit}>
       <div>
         <label htmlFor="email">Email: </label>
         <input type="text" ref={emailInput} id="email" autoComplete="off" />
@@ -45,4 +45,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginPage;

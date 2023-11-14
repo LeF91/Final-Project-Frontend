@@ -23,12 +23,12 @@ function Signup() {
         username,
         password,
         email,
-
         departement,
       });
       console.log("success", response);
     } catch (error) {
-      console.log(error);
+      console.log(error.response);
+      setError(error.ref.data.message);
       setTimeout(() => {
         setError("");
       }, 3000);
@@ -38,26 +38,35 @@ function Signup() {
     <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor="email">Email: </label>
-        <input type="text" ref={emailInput} id="email" />
+        <input type="text" ref={emailInput} id="email" autoComplete="off" />
       </div>
       <div>
         <label htmlFor="username">Username: </label>
-        <input type="text" ref={usernameInput} id="username" />
+        <input
+          type="text"
+          ref={usernameInput}
+          id="username"
+          autoComplete="off"
+        />
       </div>
       <div>
         <label htmlFor="departement">departement: </label>
-        <input type="number" ref={departementInput} id="departement" />
+        <input
+          type="number"
+          ref={departementInput}
+          id="departement"
+          autoComplete="off"
+        />
       </div>
 
       <div>
         <label htmlFor="password">Password: </label>
         <input
           type="password"
-          required
-          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
           title="Password must have at least 6 characters and contain at least one number, one lowercase and one uppercase letter."
           ref={passwordInput}
           id="password"
+          autoComplete="off"
         />
       </div>
 
