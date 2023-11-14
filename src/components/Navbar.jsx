@@ -1,5 +1,6 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
+// import { Outlet } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useState } from "react";
 import AuthMessage from "./AuthMessage";
@@ -15,11 +16,11 @@ function Navbar() {
         <nav>
           <ul>
             <li>
-              <NavLink to="/">Home</NavLink>
+              <Link to="/">Home</Link>
             </li>
 
             <li>
-              <NavLink to="/about">About</NavLink>
+              <Link to="/cars">All Cars</Link>
             </li>
           </ul>
         </nav>
@@ -32,7 +33,7 @@ function Navbar() {
               <>
                 <li>
                   <button onClick={() => setAuthToggle(!authToggle)}>
-                    toggle Auth
+                    Register
                   </button>
 
                   {authToggle && <AuthMessage />}
@@ -44,15 +45,15 @@ function Navbar() {
         <nav>
           <ul>
             {isLoggedIn && user && user.role === "user" && (
-              <NavLink to="/fav">My Favourites</NavLink>
+              <Link to="/fav">My Favourites</Link>
             )}
           </ul>
         </nav>
       </div>
 
-      <main>
+      {/* <main>
         <Outlet />
-      </main>
+      </main> */}
     </>
   );
 }

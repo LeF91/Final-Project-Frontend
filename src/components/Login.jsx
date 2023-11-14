@@ -1,10 +1,9 @@
 import { useRef, useState, useContext } from "react";
-
 import myApi from "./../service/service";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./../context/AuthContext";
 
-function LoginPage() {
+function Login() {
   const emailInput = useRef();
   const passwordInput = useRef();
   const [error, setError] = useState("");

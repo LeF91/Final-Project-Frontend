@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import myApi from "./../service/service.js";
 
 function CarFilter({ onFilter }) {
   const [brand, setBrand] = useState("");

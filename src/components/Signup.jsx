@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import myApi from "../service/service";
 import { useNavigate } from "react-router-dom";
 
-function SignupPage() {
+function Signup() {
   const usernameInput = useRef();
   const passwordInput = useRef();
   const emailInput = useRef();
