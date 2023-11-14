@@ -3,18 +3,52 @@ import { Outlet } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useState } from "react";
 import AuthMessage from "./AuthMessage";
+import Logout from "./Logout";
 
 function Navbar() {
-  const [toggle, setToggle] = useState(false);
+  const [authToggle, setAuthToggle] = useState(false);
+  const { isLoggedIn, user } = useAuth();
 
   return (
     <>
       <div className="Navbar">
-        <h1>Navbar</h1>
-      </div>
-      <button onClick={() => setToggle(!toggle)}>toggle Auth</button>
+        <nav>
+          <ul>
+            <li>
+              <NavLink to="/">Home</NavLink>
+            </li>
 
-      {toggle && <AuthDialog />}
+            <li>
+              <NavLink to="/about">About</NavLink>
+            </li>
+          </ul>
+        </nav>
+
+        <nav>
+          <ul>
+            {isLoggedIn ? (
+              <Logout />
+            ) : (
+              <>
+                <li>
+                  <button onClick={() => setAuthToggle(!authToggle)}>
+                    toggle Auth
+                  </button>
+
+                  {authToggle && <AuthMessage />}
+                </li>
+              </>
+            )}
+          </ul>
+        </nav>
+        <nav>
+          <ul>
+            {isLoggedIn && user && user.role === "user" && (
+              <NavLink to="/fav">My Favourites</NavLink>
+            )}
+          </ul>
+        </nav>
+      </div>
 
       <main>
         <Outlet />
@@ -22,3 +56,5 @@ function Navbar() {
     </>
   );
 }
+
+export default Navbar;

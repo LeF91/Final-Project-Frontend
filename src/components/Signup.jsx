@@ -1,12 +1,11 @@
 import { useRef, useState } from "react";
-import myApi from "./../service/service";
+import myApi from "../service/service";
 import { useNavigate } from "react-router-dom";
 
 function SignupPage() {
   const usernameInput = useRef();
   const passwordInput = useRef();
   const emailInput = useRef();
-  //   const userRoleInput = useRef();
   const departementInput = useRef();
 
   const [error, setError] = useState("");
@@ -17,7 +16,6 @@ function SignupPage() {
     const username = usernameInput.current.value;
     const password = passwordInput.current.value;
     const email = emailInput.current.value;
-    // const userRole = userRoleInput.current.value; to add also to the async function in the req body!!!!
     const departement = departementInput.current.value;
 
     try {
@@ -29,11 +27,8 @@ function SignupPage() {
         departement,
       });
       console.log("success", response);
-      //   change for a toggle!!! singUp - logIn//
-      //   navigate("/login");
     } catch (error) {
       console.log(error);
-      //   setError(error.response.data.message);
       setTimeout(() => {
         setError("");
       }, 3000);
@@ -43,25 +38,15 @@ function SignupPage() {
     <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor="email">Email: </label>
-        <input type="text" ref={emailInput} id="email" autoComplete="off" />
+        <input type="text" ref={emailInput} id="email" />
       </div>
       <div>
         <label htmlFor="username">Username: </label>
-        <input
-          type="text"
-          ref={usernameInput}
-          id="username"
-          autoComplete="off"
-        />
+        <input type="text" ref={usernameInput} id="username" />
       </div>
       <div>
         <label htmlFor="departement">departement: </label>
-        <input
-          type="number"
-          ref={departementInput}
-          id="departement"
-          autoComplete="off"
-        />
+        <input type="number" ref={departementInput} id="departement" />
       </div>
 
       <div>
@@ -82,4 +67,4 @@ function SignupPage() {
   );
 }
 
-export default SignupPage;
+export default Signup;

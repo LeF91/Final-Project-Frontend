@@ -1,10 +1,12 @@
 import "./App.css";
 import { Routes, Route, Link, NavLink } from "react-router-dom";
 import { Navbar } from "./components/Navbar";
-import { HomePage } from "./pages/HomePage";
-import { ErrorPage } from "./pages/ErrorPage";
+// import { CarsFilters } from "./components/CarsFilters";
 import { LoginPage } from "./components/Login";
-import { SignupPage } from "./components/SignhUp";
+import { SignupPage } from "./components/Signup";
+import { CarsPage } from "./pages/CarsPage";
+import { OneCarPage } from "./pages/OneCarPage";
+import { HomePage } from "./pages/HomePage";
 
 function App() {
   return (
@@ -12,11 +14,13 @@ function App() {
       <div className="App">
         <Routes>
           <Route element={<Navbar />}>
-            <Route path="/" element={<HomePage />}>
+            <Route index element={<HomePage />}>
               Home Page
             </Route>
-            <Route path="/vehicule">All vehicules</Route>
-            <Route path="*" element={<ErrorPage />}></Route>
+            <Route path="/cars" element={<CarsPage />}>
+              All Cars
+            </Route>
+            <Route path="/car/:carId" element={<OneCarPage />}></Route>
             <Route path="/signup" element={<SignupPage />}></Route>
             <Route path="/login" element={<LoginPage />}></Route>
           </Route>

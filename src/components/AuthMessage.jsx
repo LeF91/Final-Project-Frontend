@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Login from "./Login";
-import Signup from "./SignUp";
+import Signup from "./Signup";
 
 function AuthMessage() {
   const [isFlipped, setFlipped] = useState(false);
