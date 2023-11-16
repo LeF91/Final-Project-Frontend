@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import myApi from "../service/service";
 import { useNavigate } from "react-router-dom";
 
-function Signup() {
+function SignupPage() {
   const usernameInput = useRef();
   const passwordInput = useRef();
   const emailInput = useRef();
@@ -26,6 +26,7 @@ function Signup() {
         departement,
       });
       console.log("success", response);
+      navigate("/auth/login");
     } catch (error) {
       console.log(error.response);
       setError(error.ref.data.message);
@@ -37,10 +38,6 @@ function Signup() {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="email">Email: </label>
-        <input type="text" ref={emailInput} id="email" autoComplete="off" />
-      </div>
-      <div>
         <label htmlFor="username">Username: </label>
         <input
           type="text"
@@ -49,16 +46,6 @@ function Signup() {
           autoComplete="off"
         />
       </div>
-      <div>
-        <label htmlFor="departement">departement: </label>
-        <input
-          type="number"
-          ref={departementInput}
-          id="departement"
-          autoComplete="off"
-        />
-      </div>
-
       <div>
         <label htmlFor="password">Password: </label>
         <input
@@ -69,11 +56,24 @@ function Signup() {
           autoComplete="off"
         />
       </div>
+      <div>
+        <label htmlFor="email">Email: </label>
+        <input type="text" ref={emailInput} id="email" autoComplete="off" />
+      </div>
 
+      <div>
+        <label htmlFor="departement">departement: </label>
+        <input
+          type="number"
+          ref={departementInput}
+          id="departement"
+          autoComplete="off"
+        />
+      </div>
       <button>Signup</button>
       <p className="error">{error}</p>
     </form>
   );
 }
 
-export default Signup;
+export default SignupPage;

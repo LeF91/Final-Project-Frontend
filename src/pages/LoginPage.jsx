@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 function LoginPage() {
-  const emailInput = useRef();
+  const usernameInput = useRef();
   const passwordInput = useRef();
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -13,10 +13,10 @@ function LoginPage() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const email = emailInput.current.value;
+    const username = usernameInput.current.value;
     const password = passwordInput.current.value;
     try {
-      const response = await myApi.post("/auth/login", { email, password });
+      const response = await myApi.post("/auth/login", { username, password });
       console.log("success", response);
       localStorage.setItem("authToken", response.data.token);
       await authenticateUser();
@@ -32,8 +32,13 @@ function LoginPage() {
   return (
     <form className="form" onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="email">Email: </label>
-        <input type="text" ref={emailInput} id="email" autoComplete="off" />
+        <label htmlFor="username">Username: </label>
+        <input
+          type="text"
+          ref={usernameInput}
+          id="username"
+          autoComplete="off"
+        />
       </div>
       <div>
         <label htmlFor="password">Password: </label>

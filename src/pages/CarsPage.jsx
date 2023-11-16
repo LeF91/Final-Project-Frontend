@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CarFilter from "../components/CarsFilters.jsx";
 import myApi from "./../service/service.js";
+import { Link } from "react-router-dom";
 
 function CarsPage() {
   const [cars, setCars] = useState([]);
@@ -45,6 +46,7 @@ function CarsPage() {
 
     setFilteredCars(filtered);
   };
+  console.log(filteredCars);
 
   return (
     <div>
@@ -53,11 +55,14 @@ function CarsPage() {
 
       <ul>
         {filteredCars.map((car) => (
-          <li key={car.id}>
-            <strong>
-              {car.brand} {car.model}
-            </strong>{" "}
-            ({car.energy}) - {car.price} € - {car.power} CV
+          <li key={car._id}>
+            <Link to={"/car/" + car._id}>
+              <strong>
+                {car.brand} {car.model.name}
+              </strong>{" "}
+              {car.motorisation.energy} - {car.price} € -{" "}
+              {car.motorisation.power} CV
+            </Link>
           </li>
         ))}
       </ul>
