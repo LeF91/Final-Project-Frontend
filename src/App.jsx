@@ -13,7 +13,6 @@ import HomePage from "./pages/HomePage/HomePage";
 import EditPage from "./pages/EditPage";
 
 import CreateCarPage from "./pages/CreateCarPage";
-
 function App() {
   return (
     <>

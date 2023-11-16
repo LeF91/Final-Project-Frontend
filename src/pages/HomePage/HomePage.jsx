@@ -15,14 +15,14 @@ function HomePage() {
   // }
   return (
     <div className="homepage">
-      <h1>Driver Voice</h1>
+      <h1>Driv'ce</h1>
       <p>
-        Welcome to Driver Voice, where every comment matters. Share your
-        experiences with the cars you've driven, whether it's a rave review or a
-        cautionary tale. Together, let's build a community committed to guiding
-        future drivers in their choices, turning each comment into a valuable
-        roadmap for their upcoming journeys on the road. Join us, contribute,
-        and shape the future of every automotive adventure.
+        Welcome to Driv'ce, where every comment matters. Share your experiences
+        with the cars you've driven, whether it's a rave review or a cautionary
+        tale. Together, let's build a community committed to guiding future
+        drivers in their choices, turning each comment into a valuable roadmap
+        for their upcoming journeys on the road. Join us, contribute, and shape
+        the future of every automotive adventure.
       </p>
     </div>
   );

@@ -26,7 +26,7 @@ function SignupPage() {
         departement,
       });
       console.log("success", response);
-      navigate("/auth/login");
+      navigate("/login");
     } catch (error) {
       console.log(error.response);
       setError(error.ref.data.message);

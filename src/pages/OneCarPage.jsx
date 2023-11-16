@@ -15,7 +15,7 @@ function OneCarPage() {
   useEffect(() => {
     async function fetchComments() {
       try {
-        const res = await myApi.get(`/comments/${carId}`);
+        const res = await myApi.get(`/api/comments/${carId}`);
         setComments(res.data);
       } catch (error) {
         console.log(error);
@@ -28,7 +28,7 @@ function OneCarPage() {
   useEffect(() => {
     async function fetchCars() {
       try {
-        const res = await myApi.get(`/vehicule/${carId}`);
+        const res = await myApi.get(`/api/vehicule/${carId}`);
         setCars(res.data);
       } catch (error) {
         console.log(error);
@@ -42,7 +42,7 @@ function OneCarPage() {
     const content = commentInput.current.value;
 
     try {
-      const res = await myApi.post(`/comments/${carId}`, {
+      const res = await myApi.post(`/api/comments/${carId}`, {
         content,
         user: user._id,
       });
@@ -55,7 +55,7 @@ function OneCarPage() {
   async function handleDeleteComment(commentId) {
     try {
       console.log(commentId);
-      await myApi.delete(`/comments/${commentId}`);
+      await myApi.delete(`/api/comments/${commentId}`);
 
       setComments(comments.filter((comment) => comment._id !== commentId));
     } catch (error) {
@@ -69,7 +69,7 @@ function OneCarPage() {
   async function handleUpdateComment(commentId) {
     try {
       console.log(commentId);
-      await myApi.put(`/comments/${commentId}`);
+      await myApi.put(`/api/comments/${commentId}`);
       setComments(commentId);
     } catch (error) {
       console.log(error);
@@ -101,7 +101,7 @@ function OneCarPage() {
       <div>
         <h2>Commentaires</h2>
         <ul>
-          {comments.map((comment) => (
+          {comments.map((comment) => {
             <ul key={comment._id}>
               {" "}
               {comment.content}
@@ -113,8 +113,8 @@ function OneCarPage() {
                   </button>
                 </button>
               )}
-            </ul>
-          ))}
+            </ul>;
+          })}
           {/* <Link to="/comments/:commentId">Modifier le commentaire</Link> */}
           <li></li>
         </ul>
