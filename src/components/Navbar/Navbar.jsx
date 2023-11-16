@@ -1,14 +1,11 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
-import AuthMessage from "./AuthMessage";
-// import LoginPage from "../pages/LoginPage";
-// import Logout from "./Logout";
+import { Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import "./Navbar.css";
 
 function Navbar() {
   // const [authToggle, setAuthToggle] = useState(false);
-  const { isLoggedIn, authenticateUser, user } = useAuth();
+  const { isLoggedIn, authenticateUser, isAdmin } = useAuth();
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
@@ -19,32 +16,35 @@ function Navbar() {
     <div className="Navbar">
       <nav>
         <ul>
-          <li>
+          <p>
             <Link to="/">Home</Link>
-          </li>
+          </p>
 
-          <li>
+          <p>
             <Link to="/cars">All Cars</Link>
-          </li>
-          <li>
+          </p>
+          <p>
             <Link to="/"></Link>
-          </li>
+          </p>
+          <p>
+            <Link to="/cars/create">Create New Car</Link>
+          </p>
         </ul>
       </nav>
       <nav>
         <ul>
           {isLoggedIn ? (
-            <li>
+            <p>
               <button onClick={handleLogout}>Logout</button>
-            </li>
+            </p>
           ) : (
             <>
-              <li>
-                <NavLink to="/login">Login</NavLink>
-              </li>
-              <li>
-                <NavLink to="/signup">Signup</NavLink>
-              </li>
+              <p>
+                <Link to="/login">Login</Link>
+              </p>
+              <p>
+                <Link to="/signup">Signup</Link>
+              </p>
             </>
           )}
         </ul>

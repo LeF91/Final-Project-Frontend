@@ -1,44 +1,60 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import myApi from "./../service/service";
-// import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 function EditPage() {
-  const [comment, setComment] = useState(null);
-  const [newContent, setNewContent] = useState(comment.content);
+  const commentInput = useRef();
+  const [comment, setComment] = useState([]);
+  const { user } = useAuth;
   const { commentId } = useParams();
+  const Navigate = useNavigate;
 
   useEffect(() => {
     async function fetchComment() {
       try {
-        const res = await myApi.get(`/comments/${carId}`);
+        const res = await myApi.get(`/comments/${commentId}`);
         setComment(res.data);
+        commentInput.current.value = comment.content;
       } catch (error) {
         console.log(error);
       }
     }
     // fetchCars();
     fetchComment();
-  }, [carId]);
-  const handleUpdateComment = async () => {
+  }, [commentId]);
+
+  async function handleUpdateComment(event) {
+    event.preventDefault();
+    const content = commentInput.current.value;
+
     try {
-      await myApi.put(`/comments/${commentId}`, { content: newContent });
-      onclose();
+      const res = await myApi.put(`/comments/${commentId}`, { content });
+      console.log(res.data);
+      Navigate(`/onecar/${res.data.carId}`);
     } catch (error) {
       console.log(error);
     }
-  };
+  }
+  // const handleUpdateComment = async () => {
+  //   try {
+  //     await myApi.put(`/comments/${commentId}`, { content: newContent });
+  //     onclose();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  //   const handleUpdateComment = async (e) => {
-  //     e.preventDefault();
-  //     try {
-  //       const response = await myApi.put(`/api/comments/${commentId}`);
-  //       console.log(response.data);
-  //       navigate(`/`);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
+  // //   const handleUpdateComment = async (e) => {
+  // //     e.preventDefault();
+  // //     try {
+  // //       const response = await myApi.put(`/api/comments/${commentId}`);
+  // //       console.log(response.data);
+  // //       navigate(`/`);
+  // //     } catch (error) {
+  // //       console.log(error);
+  // //     }
+  // //   };
 
   const isAuthor = user && comment.user === user._id;
 
@@ -48,22 +64,19 @@ function EditPage() {
 
   return (
     <div>
-      <h1>Modifier le Commentaire</h1>
-      {/* <p>Commentaire actuel : {comment.content}</p> */}
-      <textarea
-        value={newContent}
-        onChange={(e) => setNewContent(e.target.value)}
-        rows="4"
-      ></textarea>
-      {/* <textarea
-        id="comment"
-        name="comment"
-        rows="4"
-        ref={commentInput}
-      ></textarea> */}
-      {/* <Link to={"/car/:carId"}></Link> */}
-      <button onClick={handleUpdateComment}>Enregistrer</button>
-      <button onClick={onclose}>Annuler</button>
+      <h1>Edit Comment</h1>
+      <form onSubmit={handleUpdateComment}>
+        <label htmlFor="content">Comment:</label>
+        <textarea
+          id="content"
+          name="content"
+          rows="4"
+          ref={commentInput}
+          required
+        ></textarea>
+
+        <button type="submit">Save Comment</button>
+      </form>
     </div>
   );
 }

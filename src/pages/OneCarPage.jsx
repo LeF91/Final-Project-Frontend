@@ -10,7 +10,7 @@ function OneCarPage() {
   const [cars, setCars] = useState([]);
   const { user } = useAuth();
   const { carId } = useParams();
-  // const {commentId} = useParams()
+  const { commentId } = useParams();
 
   useEffect(() => {
     async function fetchComments() {
@@ -79,7 +79,12 @@ function OneCarPage() {
   return (
     <div>
       {/* <h1>Commentaires sur le Modèle de Voiture</h1> */}
-      <div>{cars.brand}</div>
+      <div className="one-car-page">
+        <h1>{cars.brand}</h1>
+        {/* <p>Model{cars.model}</p>
+        <p>{}</p>
+        <p>{}</p> */}
+      </div>
       <form>
         <label htmlFor="comment">Ajouter un commentaire:</label>
         <textarea
@@ -97,7 +102,7 @@ function OneCarPage() {
         <h2>Commentaires</h2>
         <ul>
           {comments.map((comment) => (
-            <li key={comment._id}>
+            <ul key={comment._id}>
               {" "}
               {comment.content}
               {comment.user === user._id && (
@@ -108,7 +113,7 @@ function OneCarPage() {
                   </button>
                 </button>
               )}
-            </li>
+            </ul>
           ))}
           {/* <Link to="/comments/:commentId">Modifier le commentaire</Link> */}
           <li></li>
