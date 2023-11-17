@@ -15,7 +15,7 @@ function OneCarPage() {
   useEffect(() => {
     async function fetchComments() {
       try {
-        const res = await myApi.get(`vehicule/${vehiculeId}/comments`);
+        const res = await myApi.get(`/comments/${vehiculeId}`);
         setComments(res.data);
       } catch (error) {
         console.log(error);
