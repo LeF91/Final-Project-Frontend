@@ -23,7 +23,7 @@ function OneCarPage() {
     }
     // fetchvehicules();
     fetchComments();
-  }, [vehiculeId]);
+  }, [commentId]);
 
   useEffect(() => {
     async function fetchVehicules() {
