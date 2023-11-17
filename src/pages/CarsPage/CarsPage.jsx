@@ -56,7 +56,7 @@ function CarsPage() {
       <ul>
         {filteredCars.map((car) => (
           <p className="carspage" key={car._id}>
-            <Link to={"/car/" + car._id}>
+            <Link to={"/vehicule/" + car._id}>
               <strong>
                 {car.brand} {car.model.name}
               </strong>{" "}

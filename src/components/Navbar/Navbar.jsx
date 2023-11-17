@@ -21,13 +21,13 @@ function Navbar() {
           </p>
 
           <p>
-            <Link to="/cars">All Cars</Link>
+            <Link to="/vehicules">All Cars</Link>
           </p>
           <p>
             <Link to="/"></Link>
           </p>
           <p>
-            <Link to="/cars/create">Create New Car</Link>
+            <Link to="/vehicules/create">Create New Car</Link>
           </p>
         </ul>
       </nav>

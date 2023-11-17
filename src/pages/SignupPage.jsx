@@ -29,7 +29,7 @@ function SignupPage() {
       navigate("/login");
     } catch (error) {
       console.log(error.response);
-      setError(error.ref.data.message);
+      setError(error.response.data.message);
       setTimeout(() => {
         setError("");
       }, 3000);

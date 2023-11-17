@@ -7,42 +7,42 @@ import { Link } from "react-router-dom";
 function OneCarPage() {
   const commentInput = useRef();
   const [comments, setComments] = useState([]);
-  const [cars, setCars] = useState([]);
+  const [vehicules, setVehicules] = useState([]);
   const { user } = useAuth();
-  const { carId } = useParams();
+  const { vehiculeId } = useParams();
   const { commentId } = useParams();
 
   useEffect(() => {
     async function fetchComments() {
       try {
-        const res = await myApi.get(`/api/comments/${carId}`);
+        const res = await myApi.get(`vehicule/${vehiculeId}/comments`);
         setComments(res.data);
       } catch (error) {
         console.log(error);
       }
     }
-    // fetchCars();
+    // fetchvehicules();
     fetchComments();
-  }, [carId]);
+  }, [vehiculeId]);
 
   useEffect(() => {
-    async function fetchCars() {
+    async function fetchVehicules() {
       try {
-        const res = await myApi.get(`/api/vehicule/${carId}`);
-        setCars(res.data);
+        const res = await myApi.get(`/vehicule/${vehiculeId}`);
+        setVehicules(res.data);
       } catch (error) {
         console.log(error);
       }
     }
-    fetchCars();
-  }, [carId]);
+    fetchVehicules();
+  }, [vehiculeId]);
 
   async function handleAddComment(event) {
     event.preventDefault();
     const content = commentInput.current.value;
 
     try {
-      const res = await myApi.post(`/api/comments/${carId}`, {
+      const res = await myApi.post(`/vehicule/${vehiculeId}/comments`, {
         content,
         user: user._id,
       });
@@ -55,21 +55,21 @@ function OneCarPage() {
   async function handleDeleteComment(commentId) {
     try {
       console.log(commentId);
-      await myApi.delete(`/api/comments/${commentId}`);
+      await myApi.delete(`/comments/${commentId}`);
 
       setComments(comments.filter((comment) => comment._id !== commentId));
     } catch (error) {
       console.log(error);
     }
   }
-  if (!carId) {
+  if (!vehiculeId) {
     return <p>Loading...</p>;
   }
 
   async function handleUpdateComment(commentId) {
     try {
       console.log(commentId);
-      await myApi.put(`/api/comments/${commentId}`);
+      await myApi.put(`/comments/${commentId}`);
       setComments(commentId);
     } catch (error) {
       console.log(error);
@@ -80,8 +80,8 @@ function OneCarPage() {
     <div>
       {/* <h1>Commentaires sur le Modèle de Voiture</h1> */}
       <div className="one-car-page">
-        <h1>{cars.brand}</h1>
-        {/* <p>Model{cars.model}</p>
+        <h1>{vehicules.brand}</h1>
+        {/* <p>Model{vehicules.model}</p>
         <p>{}</p>
         <p>{}</p> */}
       </div>
@@ -116,7 +116,7 @@ function OneCarPage() {
             </ul>;
           })}
           {/* <Link to="/comments/:commentId">Modifier le commentaire</Link> */}
-          <li></li>
+          {/* <li></li> */}
         </ul>
       </div>
     </div>

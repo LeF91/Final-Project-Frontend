@@ -22,8 +22,11 @@ function App() {
           <Route path="/" element={<HomePage />}></Route>
 
           <Route element={<LoggedInUser />}>
-            <Route path="/cars" element={<CarsPage />}></Route>
-            <Route path="/car/:carId" element={<OneCarPage />}></Route>
+            <Route path="/vehicules" element={<CarsPage />}></Route>
+            <Route
+              path="/vehicule/:vehiculeId"
+              element={<OneCarPage />}
+            ></Route>
             <Route
               path="/comments/:commentId/edit"
               element={<EditPage />}
@@ -31,7 +34,7 @@ function App() {
           </Route>
 
           <Route element={<AdminRoute />}>
-            <Route path="/car/create" element={<CreateCarPage />}></Route>
+            <Route path="/vehicule/edit" element={<CreateCarPage />}></Route>
           </Route>
 
           <Route element={<LoggedOutUser />}>

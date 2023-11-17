@@ -31,7 +31,7 @@ function EditPage() {
     try {
       const res = await myApi.put(`/comments/${commentId}`, { content });
       console.log(res.data);
-      Navigate(`/onecar/${res.data.carId}`);
+      Navigate(`/vehicule/${res.data.carId}`);
     } catch (error) {
       console.log(error);
     }

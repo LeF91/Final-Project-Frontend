@@ -1,20 +1,34 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import myApi from "../service/service";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 function CreateCarPage() {
-  const [brand, setBrand] = useState("");
-  const [model, setModel] = useState("");
-  const [year, setYear] = useState(2022);
-  const [price, setPrice] = useState("");
-  const [power, setPower] = useState("");
-  const [image, setImage] = useState("");
+  const brandInput = useRef();
+  const modelInput = useRef();
+  const yearInput = useRef();
+  const priceInput = useRef();
+  const powerInput = useRef();
+  const imageInput = useRef();
+
+  // const [model, setModel] = useRef("");
+  // const [year, setYear] = useRef("");
+  // const [price, setPrice] = useRef("");
+  // const [power, setPower] = useRef("");
+  // const [image, setImage] = useRef("");
+  const { user } = useAuth;
   const navigate = useNavigate();
 
-  const handleCreateCar = async (event) => {
+  async function handleCreateCar(event) {
     event.preventDefault();
+    const brand = brandInput.current.value;
+    const model = modelInput.current.value;
+    const year = yearInput.current.value;
+    const price = price.current.value;
+    const power = powerInput.current.value;
+    const image = imageInput.current.value;
     try {
-      const res = await myApi.post("/cars", {
+      const res = await myApi.post("/vehicules", {
         brand,
         model,
         year,
@@ -23,14 +37,14 @@ function CreateCarPage() {
         image,
       });
       console.log(res);
-      navigate(`/cars`);
+      navigate(`/${user._id}`);
     } catch (error) {
       console.log(error);
     }
-  };
-
+  }
+  // onSubmit={handleCreateCar}
   return (
-    <form onSubmit={handleCreateCar}>
+    <form>
       <div>
         <label htmlFor="brand">Brand</label>
         <input
