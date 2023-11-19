@@ -16,7 +16,7 @@ function CreateCarPage() {
   // const [price, setPrice] = useRef("");
   // const [power, setPower] = useRef("");
   // const [image, setImage] = useRef("");
-  const { user } = useAuth;
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   async function handleCreateCar(event) {
@@ -24,7 +24,7 @@ function CreateCarPage() {
     const brand = brandInput.current.value;
     const model = modelInput.current.value;
     const year = yearInput.current.value;
-    const price = price.current.value;
+    const price = priceInput.current.value;
     const power = powerInput.current.value;
     const image = imageInput.current.value;
     try {
