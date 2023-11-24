@@ -28,7 +28,7 @@ function CreateCarPage() {
     const power = powerInput.current.value;
     const image = imageInput.current.value;
     try {
-      const res = await myApi.post("/vehicules", {
+      const res = await myApi.post("/vehicule/create", {
         brand,
         model,
         year,

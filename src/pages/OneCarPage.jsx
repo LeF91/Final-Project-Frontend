@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import myApi from "./../service/service.js";
 import { useAuth } from "./../context/AuthContext";
 import { useParams } from "react-router-dom";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function OneCarPage() {
   const commentInput = useRef();
@@ -11,18 +11,6 @@ function OneCarPage() {
   const { user } = useAuth();
   const { vehiculeId } = useParams();
   const { commentId } = useParams();
-
-  useEffect(() => {
-    async function fetchVehicules() {
-      try {
-        const res = await myApi.get(`/vehicule/${vehiculeId}`);
-        setVehicules(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    fetchVehicules();
-  }, [vehiculeId]);
 
   useEffect(() => {
     async function fetchComments() {
@@ -35,6 +23,18 @@ function OneCarPage() {
     }
     // fetchvehicules();
     fetchComments();
+  }, []);
+
+  useEffect(() => {
+    async function fetchVehicules() {
+      try {
+        const res = await myApi.get(`/vehicule/${vehiculeId}`);
+        setVehicules(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchVehicules();
   }, [vehiculeId]);
 
   async function handleAddComment(event) {
@@ -102,8 +102,7 @@ function OneCarPage() {
         <h2>Commentaires</h2>
         <ul>
           {comments.map((comment) => {
-            <ul key={comment._id}>
-              {" "}
+            <li key={comment._id}>
               {comment.content}
               {comment.user === user._id && (
                 <button onClick={() => handleDeleteComment(comment._id)}>
@@ -113,7 +112,7 @@ function OneCarPage() {
                   </button>
                 </button>
               )}
-            </ul>;
+            </li>;
           })}
           {/* <Link to="/comments/:commentId">Modifier le commentaire</Link> */}
           {/* <li></li> */}
