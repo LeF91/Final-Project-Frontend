@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import myApi from "./../service/service.js";
 import { useAuth } from "./../context/AuthContext";
 import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 function OneCarPage() {
   const commentInput = useRef();
@@ -11,19 +11,6 @@ function OneCarPage() {
   const { user } = useAuth();
   const { vehiculeId } = useParams();
   const { commentId } = useParams();
-
-  useEffect(() => {
-    async function fetchComments() {
-      try {
-        const res = await myApi.get(`/comments/${vehiculeId}`);
-        setComments(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    // fetchvehicules();
-    fetchComments();
-  }, [commentId]);
 
   useEffect(() => {
     async function fetchVehicules() {
@@ -35,6 +22,19 @@ function OneCarPage() {
       }
     }
     fetchVehicules();
+  }, [vehiculeId]);
+
+  useEffect(() => {
+    async function fetchComments() {
+      try {
+        const res = await myApi.get(`/vehicule/${vehiculeId}/comments`);
+        setComments(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    // fetchvehicules();
+    fetchComments();
   }, [vehiculeId]);
 
   async function handleAddComment(event) {

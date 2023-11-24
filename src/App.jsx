@@ -34,7 +34,7 @@ function App() {
           </Route>
 
           <Route element={<AdminRoute />}>
-            <Route path="/vehicule/edit" element={<CreateCarPage />}></Route>
+            <Route path="/edit" element={<CreateCarPage />}></Route>
           </Route>
 
           <Route element={<LoggedOutUser />}>
