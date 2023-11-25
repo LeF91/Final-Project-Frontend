@@ -10,7 +10,7 @@ import SignupPage from "./pages/SignupPage";
 import CarsPage from "./pages/CarsPage/CarsPage";
 import OneCarPage from "./pages/OneCarPage";
 import HomePage from "./pages/HomePage/HomePage";
-import EditPage from "./pages/EditPage";
+// import EditPage from "./pages/EditPage";
 
 import CreateCarPage from "./pages/CreateCarPage";
 function App() {
@@ -27,14 +27,14 @@ function App() {
               path="/vehicule/:vehiculeId"
               element={<OneCarPage />}
             ></Route>
-            <Route
+            {/* <Route
               path="/comments/:commentId/edit"
               element={<EditPage />}
-            ></Route>
+            ></Route> */}
           </Route>
 
           <Route element={<AdminRoute />}>
-            <Route path="/edit" element={<CreateCarPage />}></Route>
+            <Route path="/create" element={<CreateCarPage />}></Route>
           </Route>
 
           <Route element={<LoggedOutUser />}>

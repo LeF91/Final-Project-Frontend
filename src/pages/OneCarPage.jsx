@@ -7,35 +7,35 @@ import { Link } from "react-router-dom";
 function OneCarPage() {
   const commentInput = useRef();
   const [comments, setComments] = useState([]);
-  const [vehicules, setVehicules] = useState([]);
+  const [car, setCar] = useState([]);
   const { user } = useAuth();
   const { vehiculeId } = useParams();
   const { commentId } = useParams();
 
-  useEffect(() => {
-    async function fetchComments() {
-      try {
-        const res = await myApi.get(`/vehicule/${vehiculeId}/comments`);
-        setComments(res.data);
-      } catch (error) {
-        console.log(error);
-      }
+  async function fetchCar() {
+    try {
+      const res = await myApi.get(`/vehicule/${vehiculeId}`);
+      setCar(res.data);
+    } catch (error) {
+      console.log(error);
     }
-    // fetchvehicules();
-    fetchComments();
-  }, []);
-
+  }
   useEffect(() => {
-    async function fetchVehicules() {
-      try {
-        const res = await myApi.get(`/vehicule/${vehiculeId}`);
-        setVehicules(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    fetchVehicules();
+    fetchCar();
   }, [vehiculeId]);
+
+  async function fetchComments() {
+    try {
+      const res = await myApi.get(`/vehicule/${vehiculeId}/comments`);
+      setComments(res.data);
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  useEffect(() => {
+    fetchComments();
+  }, [commentId]);
 
   async function handleAddComment(event) {
     event.preventDefault();
@@ -80,8 +80,8 @@ function OneCarPage() {
     <div>
       {/* <h1>Commentaires sur le Modèle de Voiture</h1> */}
       <div className="one-car-page">
-        <h1>{vehicules.brand}</h1>
-        {/* <p>Model{vehicules.model}</p>
+        <h1>{car.brand}</h1>
+        {/* <p>{vehicule.model}</p>
         <p>{}</p>
         <p>{}</p> */}
       </div>
@@ -97,7 +97,6 @@ function OneCarPage() {
 
         <button onClick={handleAddComment}>Ajouter le commentaire</button>
       </form>
-
       <div>
         <h2>Commentaires</h2>
         <ul>

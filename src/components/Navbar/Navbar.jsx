@@ -27,7 +27,7 @@ function Navbar() {
             <Link to="/"></Link>
           </p>
           <p>
-            <Link to="/vehicules/create">Create New Car</Link>
+            <Link to="/create">Create New Car</Link>
           </p>
         </ul>
       </nav>
