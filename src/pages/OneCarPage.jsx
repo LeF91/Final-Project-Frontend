@@ -1,11 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
-import myApi from "../../service/service.js";
-import { useAuth } from "../../context/AuthContext.jsx";
+import myApi from "../service/service.js";
+import { useAuth } from "../context/AuthContext.jsx";
 import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
-import "./OneCarPage.css";
 
-// les commentaires ne s'affiche toujours pas
 function OneCarPage() {
   const commentInput = useRef();
   const [comments, setComments] = useState([]);
@@ -68,18 +65,11 @@ function OneCarPage() {
     return <p>Loading...</p>;
   }
 
-  async function handleUpdateComment(commentId, updateContent) {
+  async function handleUpdateComment(commentId) {
     try {
       console.log(commentId);
-      await myApi.put(`/comments/${commentId}`, { content: updateContent });
-      // setComments(commentId);
-      setComments((prevComments) =>
-        prevComments.map((comment) =>
-          comment._id === commentId
-            ? { ...comment, content: updateContent }
-            : comment
-        )
-      );
+      await myApi.put(`/comments/${commentId}`);
+      setComments(commentId);
     } catch (error) {
       console.log(error);
     }
@@ -90,9 +80,7 @@ function OneCarPage() {
       {/* <h1>Commentaires sur le Modèle de Voiture</h1> */}
       <div className="one-car-page">
         <h1>{car.brand}</h1>
-        {/* <p>{vehicule.model}</p>
-        <p>{}</p>
-        <p>{}</p> */}
+        {/* <p>{car.model.name}</p> */}
       </div>
       <form>
         <label htmlFor="comment">Ajouter un commentaire:</label>
@@ -110,18 +98,14 @@ function OneCarPage() {
         <h2>Commentaires</h2>
         <ul>
           {comments.map((comment) => (
-            <li className="ListComment" key={comment._id}>
-              {/* {comment.content} */}
+            // les commentaires ne s'affiche toujours pas mais sont bien présent dans myApi
+            <li key={comment._id}>
               {comment.user === user._id && (
                 <div>
                   <button onClick={() => handleDeleteComment(comment._id)}>
                     Supprimer mon commentaire
                   </button>
-                  <button
-                    onClick={() =>
-                      handleUpdateComment(comment._id, "Nouveau Contenu")
-                    }
-                  >
+                  <button onClick={() => handleUpdateComment(comment._id)}>
                     Modifier mon commentaire
                   </button>
                 </div>

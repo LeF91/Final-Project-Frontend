@@ -8,7 +8,7 @@ import AdminRoute from "./navigation/Admin";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import CarsPage from "./pages/CarsPage/CarsPage";
-import OneCarPage from "./pages/OneCarPage/OneCarPage";
+import OneCarPage from "./pages/OneCarPage";
 import HomePage from "./pages/HomePage/HomePage";
 // import EditPage from "./pages/EditPage";
 

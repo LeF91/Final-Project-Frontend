@@ -30,41 +30,7 @@ function CreateCarPage() {
       [name]: value,
     });
   };
-  // const [brand, setBrand] = useState("");
-  // const [model, setModel] = useState("");
-  // const [year, setYear] = useState("");
-  // const [price, setPrice] = useState("");
-  // const [energy, setEnergy] = useState("");
-  // const [power, setPower] = useState("");
-  // const [image, setImage] = useState("");
-  // const { user } = useAuth();
-  // const navigate = useNavigate();
 
-  // async function handleCreateCar(event) {
-  //   event.preventDefault();
-  //   const brand = brandInput.current.value;
-  //   const model = modelInput.current.value;
-  //   const year = yearInput.current.value;
-  //   const price = priceInput.current.value;
-  //   const energy = energyInput.current.value;
-  //   const power = powerInput.current.value;
-  //   const image = imageInput.current.value;
-  //   try {
-  //     const res = await myApi.post("/vehicule/create", {
-  //       brand,
-  //       model,
-  //       year,
-  //       price,
-  //       energy,
-  //       power,
-  //       image,
-  //     });
-  //     console.log(res);
-  //     navigate(`/${user._id}`);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
   const handleCreateCar = async (event) => {
     event.preventDefault();
     try {
@@ -94,24 +60,7 @@ function CreateCarPage() {
       console.log("Error adding car:", error);
     }
   };
-  // const handleCreateCar = async (event) => {
-  //   event.preventDefault();
-  //   try {
-  //     const res = await myApi.post("/vehicule/create", {
-  //       brand,
-  //       model,
-  //       year,
-  //       price,
-  //       energy,
-  //       power,
-  //       image,
-  //     });
-  //     navigate(`/${user._id}`);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-  // onSubmit={handleCreateCar}
+
   return (
     <div className="createDiv">
       <h2>Add New Car</h2>
@@ -155,18 +104,6 @@ function CreateCarPage() {
           />
         </div>
 
-        {/* <div className="createDiv">
-          <label htmlFor="modelProductionStop">Model Production Stop</label>
-          <br />
-          <input
-            className="inputCreate"
-            type="text"
-            name="model.productionStop"
-            value={car.model.productionStop}
-            onChange={handleChange}
-          />
-        </div> */}
-
         <div className="createDiv">
           <label htmlFor="motorisationName">Motorisation</label>
           <br />
@@ -205,18 +142,6 @@ function CreateCarPage() {
           />
         </div>
 
-        {/* <div className="createDiv">
-          <label htmlFor="category">Category</label>
-          <br />
-          <input
-            className="inputCreate"
-            type="text"
-            name="category"
-            value={car.category}
-            onChange={handleChange}
-          />
-        </div> */}
-
         <div className="createDiv">
           <label htmlFor="price">Price</label>
           <br />
@@ -251,74 +176,3 @@ function CreateCarPage() {
 }
 
 export default CreateCarPage;
-//   return (
-//     <form onSubmit={handleCreateCar}>
-//       <div>
-//         <label htmlFor="brand">Brand</label>
-//         <input
-//           type="text"
-//           id="brand"
-//           // ref={brandInput}
-//           value={brand}
-//           onChange={(e) => setBrand(e.target.value)}
-//         />
-//       </div>
-//       <div>
-//         <label htmlFor="model">Model</label>
-//         <input
-//           type="text"
-//           id="model"
-//           value={model.name}
-//           onChange={(e) => setModel(e.target.value)}
-//         />
-//       </div>
-//       <div>
-//         <label htmlFor="year">Year</label>
-//         <input
-//           type="text"
-//           id="year"
-//           value={year}
-//           onChange={(e) => setYear(e.target.value)}
-//         />
-//       </div>
-//       <div>
-//         <label htmlFor="price">Price</label>
-//         <input
-//           type="text"
-//           id="price"
-//           value={price}
-//           onChange={(e) => setPrice(e.target.value)}
-//         />
-//       </div>
-//       <div>
-//         <label htmlFor="power">Power</label>
-//         <input
-//           type="text"
-//           id="power"
-//           value={power}
-//           onChange={(e) => setPower(e.target.value)}
-//         />
-//       </div>
-//       <div>
-//         <label htmlFor="energy">Energy</label>
-//         <input
-//           type="text"
-//           id="energy"
-//           onChange={(e) => setEnergy(e.target.value)}
-//         />
-//       </div>
-//       <div>
-//         <label htmlFor="image">image</label>
-//         <input
-//           type="url"
-//           id="image"
-//           value={image}
-//           onChange={(e) => setImage(e.target.value)}
-//         />
-//       </div>
-//       <button onClick={handleCreateCar}>Create Car</button>
-//     </form>
-//   );
-// }
-
-// export default CreateCarPage;
