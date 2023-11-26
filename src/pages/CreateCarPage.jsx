@@ -3,13 +3,6 @@ import myApi from "../service/service";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
-// function CreateCarPage() {
-// const brandInput = useRef();
-// const modelInput = useRef();
-// const yearInput = useRef();
-// const priceInput = useRef();
-// const powerInput = useRef();
-// const imageInput = useRef();
 function CreateCarPage() {
   const [car, setCar] = useState({
     image: "",

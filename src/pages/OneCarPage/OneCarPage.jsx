@@ -1,9 +1,11 @@
 import React, { useRef, useState, useEffect } from "react";
-import myApi from "./../service/service.js";
-import { useAuth } from "./../context/AuthContext";
+import myApi from "../../service/service.js";
+import { useAuth } from "../../context/AuthContext.jsx";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import "./OneCarPage.css";
 
+// les commentaires ne s'affiche toujours pas
 function OneCarPage() {
   const commentInput = useRef();
   const [comments, setComments] = useState([]);
@@ -28,7 +30,7 @@ function OneCarPage() {
     try {
       const res = await myApi.get(`/vehicule/${vehiculeId}/comments`);
       setComments(res.data);
-      console.log(res.data);
+      // console.log(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -66,11 +68,18 @@ function OneCarPage() {
     return <p>Loading...</p>;
   }
 
-  async function handleUpdateComment(commentId) {
+  async function handleUpdateComment(commentId, updateContent) {
     try {
       console.log(commentId);
-      await myApi.put(`/comments/${commentId}`);
-      setComments(commentId);
+      await myApi.put(`/comments/${commentId}`, { content: updateContent });
+      // setComments(commentId);
+      setComments((prevComments) =>
+        prevComments.map((comment) =>
+          comment._id === commentId
+            ? { ...comment, content: updateContent }
+            : comment
+        )
+      );
     } catch (error) {
       console.log(error);
     }
@@ -100,21 +109,25 @@ function OneCarPage() {
       <div>
         <h2>Commentaires</h2>
         <ul>
-          {comments.map((comment) => {
-            <li key={comment._id}>
-              {comment.content}
+          {comments.map((comment) => (
+            <li className="ListComment" key={comment._id}>
+              {/* {comment.content} */}
               {comment.user === user._id && (
-                <button onClick={() => handleDeleteComment(comment._id)}>
-                  Supprimer mon commentaire
-                  <button onClick={() => handleUpdateComment(comment._id)}>
+                <div>
+                  <button onClick={() => handleDeleteComment(comment._id)}>
+                    Supprimer mon commentaire
+                  </button>
+                  <button
+                    onClick={() =>
+                      handleUpdateComment(comment._id, "Nouveau Contenu")
+                    }
+                  >
                     Modifier mon commentaire
                   </button>
-                </button>
+                </div>
               )}
-            </li>;
-          })}
-          {/* <Link to="/comments/:commentId">Modifier le commentaire</Link> */}
-          {/* <li></li> */}
+            </li>
+          ))}
         </ul>
       </div>
     </div>
